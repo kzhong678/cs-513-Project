@@ -1,0 +1,48 @@
+
+/* Start of top-level graph */
+digraph Workflow {
+rankdir=TB
+
+/* Title for graph */
+fontname=Courier; fontsize=18; labelloc=t
+label=main
+
+/* Start of double cluster for drawing box around nodes in workflow */
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; color=white
+
+/* Style for nodes representing atomic programs in workflow */
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
+
+/* Nodes representing atomic programs in workflow */
+OpenRefine_Data_Cleaning
+SQL_Validation
+Or2yw_Inner_Workflow_Modeling
+
+/* Style for nodes representing non-parameter data channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes for non-parameter data channels in workflow */
+"cleaned_data.csv"
+"OpenRefineOperationHistory.JSON"
+
+/* Style for nodes representing parameter channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing parameter channels in workflow */
+
+/* Edges representing connections between programs and channels */
+OpenRefine_Data_Cleaning -> "cleaned_data.csv"
+OpenRefine_Data_Cleaning -> "OpenRefineOperationHistory.JSON"
+"raw_data.csv" -> OpenRefine_Data_Cleaning
+SQL_Validation -> "validated_data.csv"
+"cleaned_data.csv" -> SQL_Validation
+Or2yw_Inner_Workflow_Modeling -> "InnerWorflow.pdf"
+Or2yw_Inner_Workflow_Modeling -> "InnerWorflow.png"
+"OpenRefineOperationHistory.JSON" -> Or2yw_Inner_Workflow_Modeling
+
+/* End of double cluster for drawing box around nodes in workflow */
+}}
+
+/* End of top-level graph */
+}
